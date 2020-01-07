@@ -50,6 +50,7 @@ export default {
                 'XAG/CNY': 'USD Gold',
                 'XAG/USD': 'USD Silver'
             };
+            var tableData = [];
             for(let i = 0; i < goldData.length; i++) {
                 var gold = {
                     name: goldType[goldData[i].productId],
@@ -57,21 +58,32 @@ export default {
                     ratio: ((goldData[i].midRate - goldData[i].minRate) / goldData[i].minRate * 100).toFixed(2)
                 };
 
-                this.tableData.push(gold);
+                tableData.push(gold);
             }
+            this.tableData = tableData;
+        },
+        getGoldPrice() {
+            axios.get('https://129.226.121.194:8443/gold-price').then((response) => {
+                if(200 != response.status) {
+                    console.error('gold-price error response');
+                    return;
+                }
+                let goldData = response.data.data.result.datals;
+                this.formaterData(goldData);
+            });
         }
     },
     mounted () {
-
-        axios.get('https://129.226.121.194:8443/gold-price').then((response) => {
-            console.log(response);
-            if(200 != response.status) {
-                console.error('gold-price error response');
-                return;
-            }
-            let goldData = response.data.data.result.datals;
-            this.formaterData(goldData);
-        });
+        setInterval(() => {
+            axios.get('https://129.226.121.194:8443/gold-price').then((response) => {
+                if(200 != response.status) {
+                    console.error('gold-price error response');
+                    return;
+                }
+                let goldData = response.data.data.result.datals;
+                this.formaterData(goldData);
+            });
+        }, 1000);
     }
 }
 </script>
