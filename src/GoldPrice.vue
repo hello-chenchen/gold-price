@@ -63,7 +63,7 @@ export default {
     },
     mounted () {
 
-        axios.get('http://129.226.121.194/gold-price').then((response) => {
+        axios.get('https://129.226.121.194:8443/gold-price').then((response) => {
             console.log(response);
             if(200 != response.status) {
                 console.error('gold-price error response');
