@@ -1,0 +1,88 @@
+<template>
+  <el-table
+    :data="tableData"
+    style="width: 100%"
+    :default-sort = "{prop: 'name', order: 'descending'}"
+    :row-class-name="tableRowClassName"
+    >
+    <el-table-column
+      prop="name"
+      label="name"
+      sortable
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="price"
+      label="price"
+      sortable
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="ratio"
+      label="Price ratio"
+      sortable
+      width="180">
+    </el-table-column>
+  </el-table>
+</template>
+
+<script>
+import axios from 'axios';
+export default {
+    name: "GoldPrice",
+    data() {
+        return {
+            tableData: []
+        }
+    },
+    methods: {
+        tableRowClassName({row, rowIndex}) {
+            if(this.tableData[rowIndex].ratio > 0) {
+                return 'up-row';
+            } else {
+                return 'down-row';
+            }
+        },
+        formaterData(goldData) {
+            var goldType = {
+                'XAU/CNY': 'RMB Gold',
+                'XAU/USD': 'RMB Silver',
+                'XAG/CNY': 'USD Gold',
+                'XAG/USD': 'USD Silver'
+            };
+            for(let i = 0; i < goldData.length; i++) {
+                var gold = {
+                    name: goldType[goldData[i].productId],
+                    price: goldData[i].midRate,
+                    ratio: ((goldData[i].midRate - goldData[i].minRate) / goldData[i].minRate * 100).toFixed(2)
+                };
+
+                this.tableData.push(gold);
+            }
+        }
+    },
+    mounted () {
+
+        axios.get('http://129.226.121.194/gold-price').then((response) => {
+            console.log(response);
+            if(200 != response.status) {
+                console.error('gold-price error response');
+                return;
+            }
+            let goldData = response.data.data.result.datals;
+            this.formaterData(goldData);
+        });
+    }
+}
+</script>
+<style>
+    .el-table .up-row {
+        background: red;
+        color: white;
+    }
+
+    .el-table .down-row {
+        background: green;
+        color: white;
+    }
+</style>
