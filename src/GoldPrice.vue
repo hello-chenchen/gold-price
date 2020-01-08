@@ -89,12 +89,10 @@ export default {
 </script>
 <style>
     .el-table .up-row {
-        background: red;
-        color: white;
+        color: red;
     }
 
     .el-table .down-row {
-        background: green;
-        color: white;
+        color: green;
     }
 </style>
