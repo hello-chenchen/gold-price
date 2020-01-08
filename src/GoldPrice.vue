@@ -46,8 +46,8 @@ export default {
         formaterData(goldData) {
             var goldType = {
                 'XAU/CNY': 'RMB Gold',
-                'XAU/USD': 'RMB Silver',
-                'XAG/CNY': 'USD Gold',
+                'XAU/USD': 'USD Gold',
+                'XAG/CNY': 'RMB Silver',
                 'XAG/USD': 'USD Silver'
             };
             var tableData = [];
