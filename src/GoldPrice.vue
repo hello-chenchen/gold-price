@@ -46,8 +46,8 @@ export default {
         formaterData(goldData) {
             var goldType = {
                 'XAU/CNY': 'RMB Gold',
-                'XAU/USD': 'RMB Silver',
-                'XAG/CNY': 'USD Gold',
+                'XAU/USD': 'USD Gold',
+                'XAG/CNY': 'RMB Silver',
                 'XAG/USD': 'USD Silver'
             };
             var tableData = [];
@@ -89,12 +89,10 @@ export default {
 </script>
 <style>
     .el-table .up-row {
-        background: red;
-        color: white;
+        color: red;
     }
 
     .el-table .down-row {
-        background: green;
-        color: white;
+        color: green;
     }
 </style>
