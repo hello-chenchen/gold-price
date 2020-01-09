@@ -2,7 +2,7 @@
   <el-table
     :data="tableData"
     style="width: 100%"
-    :default-sort = "{prop: 'name', order: 'descending'}"
+    :default-sort = "{prop: 'name', order: 'ascending'}"
     :row-class-name="tableRowClassName"
     >
     <el-table-column
@@ -55,7 +55,7 @@ export default {
                 var gold = {
                     name: goldType[goldData[i].productId],
                     price: goldData[i].midRate,
-                    ratio: ((goldData[i].midRate - goldData[i].minRate) / goldData[i].minRate * 100).toFixed(2)
+                    ratio: ((goldData[i].midRate - goldData[i].openRate) / goldData[i].openRate * 100).toFixed(2)
                 };
 
                 tableData.push(gold);
