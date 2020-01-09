@@ -14,7 +14,7 @@ module.exports = (options = {dev: true}) => ({
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'build'),
-    publicPath: options.dev ? '/assets/' : publicPath
+    publicPath: options.dev ?  publicPath : '/assets/'
   },
   module: {
     rules: [
