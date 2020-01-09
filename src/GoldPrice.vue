@@ -75,14 +75,7 @@ export default {
     },
     mounted () {
         setInterval(() => {
-            axios.get('https://129.226.121.194:8443/gold-price').then((response) => {
-                if(200 != response.status) {
-                    console.error('gold-price error response');
-                    return;
-                }
-                let goldData = response.data.data.result.datals;
-                this.formaterData(goldData);
-            });
+            this.getGoldPrice();
         }, 1000);
     }
 }
