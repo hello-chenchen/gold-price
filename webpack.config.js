@@ -6,7 +6,7 @@ const url = require('url')
 const publicPath = ''
 
 
-module.exports = (options = {}) => ({
+module.exports = (options = {dev: true}) => ({
   entry: {
     vendor: './src/vendor',
     index: './src/main.js'
