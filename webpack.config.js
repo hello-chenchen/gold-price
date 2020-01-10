@@ -2,11 +2,13 @@ const resolve = require('path').resolve
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const url = require('url')
 const publicPath = ''
 
 
-module.exports = (options = {dev: true}) => ({
+module.exports = (options = {dev: false}) => ({
+  mode: "production",
   entry: {
     vendor: './src/vendor',
     index: './src/main.js'
@@ -14,7 +16,7 @@ module.exports = (options = {dev: true}) => ({
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'build'),
-    publicPath: options.dev ?  publicPath : '/assets/'
+    publicPath: options.dev ?  '/assets/' : publicPath
   },
   module: {
     rules: [
@@ -49,6 +51,7 @@ module.exports = (options = {dev: true}) => ({
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     })
@@ -71,6 +74,6 @@ module.exports = (options = {dev: true}) => ({
     historyApiFallback: {
       index: url.parse(options.dev ? '/assets/' : publicPath).pathname
     }
-  },
-  devtool: options.dev ? '#eval-source-map' : '#source-map'
+  }
+  // devtool: options.dev ? '#source-map' : '#nosources-source-map'
 })
