@@ -1,0 +1,9 @@
+{
+    "name": "名字",
+    "price": "价格",
+    "ratio": "变化率",
+    "RMBGold": "人民币纸黄金",
+    "USDGold": "美元纸黄金",
+    "RMBSilver": "人民币纸白银",
+    "USDSilver": "美元纸白银"
+}

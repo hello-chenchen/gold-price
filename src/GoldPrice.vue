@@ -7,19 +7,19 @@
     >
     <el-table-column
       prop="name"
-      label="name"
+      :label="this.$t('name')"
       sortable
       width="180">
     </el-table-column>
     <el-table-column
       prop="price"
-      label="price"
+      :label="this.$t('price')"
       sortable
       width="180">
     </el-table-column>
     <el-table-column
       prop="ratio"
-      label="Price ratio"
+      :label="this.$t('ratio')"
       sortable
       width="180">
     </el-table-column>
@@ -45,10 +45,10 @@ export default {
         },
         formaterData(goldData) {
             var goldType = {
-                'XAU/CNY': 'RMB Gold',
-                'XAU/USD': 'USD Gold',
-                'XAG/CNY': 'RMB Silver',
-                'XAG/USD': 'USD Silver'
+                'XAU/CNY': this.$t("RMBGold"),
+                'XAU/USD': this.$t("USDGold"),
+                'XAG/CNY': this.$t("RMBSilver"),
+                'XAG/USD': this.$t("USDSilver")
             };
             var tableData = [];
             for(let i = 0; i < goldData.length; i++) {
